@@ -11,6 +11,8 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 
   # aktywowanie hermetycznego środowiska
   $ source .venv/bin/activate
+  $ make deps
+  # make deps wykonuje 2 ponizsze polecenia:
   $ pip install -r requirements.txt
   $ pip install -r test_requirements.txt
 
@@ -28,13 +30,19 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 
   # albo:
   $ PYTHONPATH=. FLASK_APP=hello_world flask run
+
+  # albo
+  $ make run
   ```
+
 
 - Uruchamianie testów (see: http://doc.pytest.org/en/latest/capture.html):
 
   ```
   $ PYTHONPATH=. py.test
   $ PYTHONPATH=. py.test --verbose -s
+  # albo uzywamy polecenia
+  $ make test
   ```
 
 - Kontynuując pracę z projektem, aktywowanie hermetycznego środowiska dla aplikacji py:
@@ -47,7 +55,7 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   ```
   ...
 
-  # aktywacja 
+  # aktywacja
   $ source .venv/bin/activate
   ```
 
