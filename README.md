@@ -11,6 +11,8 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 
   # aktywowanie hermetycznego środowiska
   $ source .venv/bin/activate
+  $ make deps
+  # make deps wykonuje 2 ponizsze polecenia:
   $ pip install -r requirements.txt
   $ pip install -r test_requirements.txt
 
@@ -29,16 +31,27 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   # albo:
   $ PYTHONPATH=. FLASK_APP=hello_world flask run
 
+<<<<<<< HEAD
   # albo:
 
   $ make run
+=======
+  # albo
+  $ make run
+
+  #sprawdzenie czy dziala poprawnie
+  $ curl 127.0.0.1:5000
+
+>>>>>>> 19b9309fb99bf482c968f50b2311c2a8ddad9f18
   ```
+
 
 - Uruchamianie testów (see: http://doc.pytest.org/en/latest/capture.html):
 
   ```
   $ PYTHONPATH=. py.test
   $ PYTHONPATH=. py.test --verbose -s
+<<<<<<< HEAD
 
 
   # albo:
@@ -54,6 +67,10 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
     # albo:
 
     $ flake8 hello_world test
+=======
+  # albo uzywamy polecenia:
+  $ make test
+>>>>>>> 19b9309fb99bf482c968f50b2311c2a8ddad9f18
   ```
 
 - Kontynuując pracę z projektem, aktywowanie hermetycznego środowiska dla aplikacji py:
@@ -66,14 +83,29 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   ```
   ...
 
-  # aktywacja 
+  # aktywacja
   $ source .venv/bin/activate
   ```
 
 - Integracja z TravisCI:
 
   ```
-  # miejsce na twoje notatki
+  # plik .travis.yml
+  language: python
+
+  services:
+    - docker
+
+  python:
+    - "3.8"
+  install:
+    - make deps
+  script:
+    - make test
+    - make lint
+  after_success:
+    - make docker_build
+
   ```
 
 # Pomocnicze
@@ -85,6 +117,27 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 ## Centos
 
 - Instalacja docker-a:
+  ```
+  Docker zazwyczaj nie restartujemy, kasujemy i uruchamiamy na nowo:
+  $ docker stop hello-world-printer-dev
+  $ docker rm hello-world-printer-dev
+  $ make docker_run
+  ```
+
+```
+  #Uruchom hello-world-printer jako docker, w terminalu:
+  $ make docker_run
+  # zweryfikuj, że docker jest uruchomiony
+  $ docker ps
+  # sprawdź, czy aplikacje działa poprawnie
+  $ curl 127.0.0.1:5000
+  # wyświetlmy logi, zauważ, że widzisz informację o połączeniu z curla
+  $ docker logs hello-world-printer-dev
+  # jeśli nie widzisz dockera, kiedy uruchamiasz z docker ps dodaj -a
+  $ docker ps -a
+  $ docker logs hello-world-printer-dev
+```
+
 
   ```
   $ yum remove docker \

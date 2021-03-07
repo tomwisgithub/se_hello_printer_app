@@ -1,4 +1,7 @@
+<<<<<<< HEAD
   
+=======
+>>>>>>> 19b9309fb99bf482c968f50b2311c2a8ddad9f18
 FROM python:3
 
 ARG APP_DIR=/usr/src/hello_world_printer
@@ -12,4 +15,8 @@ ADD hello_world/ $APP_DIR/hello_world/
 ADD main.py $APP_DIR
 
 CMD PYTHONPATH=$PYTHONPATH:/usr/src/hello_world_printer \
+<<<<<<< HEAD
       FLASK_APP=hello_world flask run --host=0.0.0.0
+=======
+  FLASK_APP=hello_world flask run --host=0.0.0.0
+>>>>>>> 19b9309fb99bf482c968f50b2311c2a8ddad9f18

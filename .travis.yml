@@ -1,5 +1,6 @@
 language: python
 
+<<<<<<< HEAD
 python:
   - "3.6"
 services:
@@ -11,3 +12,17 @@ script:
   - make test
   - make docker_build
   - make docker_push
+=======
+services:
+  - docker
+
+python:
+  - "3.8"
+install:
+  - make deps
+script:
+  - make test
+  - make lint
+  - make docker_build
+  - make docker_push
+>>>>>>> 19b9309fb99bf482c968f50b2311c2a8ddad9f18
