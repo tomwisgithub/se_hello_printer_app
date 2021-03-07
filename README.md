@@ -103,3 +103,9 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   $ yum install -y docker-ce
   $ systemctl start docker
   ```
+  ```
+  $ docker ps
+  $ docker rm ... (np. hello-world-printer-dev)
+  $ make docker_build
+  $ make docker_run
+  ```
