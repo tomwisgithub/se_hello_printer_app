@@ -33,6 +33,10 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 
   # albo
   $ make run
+
+  #sprawdzenie czy dziala poprawnie
+  $ curl 127.0.0.1:5000
+
   ```
 
 
@@ -41,7 +45,7 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
   ```
   $ PYTHONPATH=. py.test
   $ PYTHONPATH=. py.test --verbose -s
-  # albo uzywamy polecenia
+  # albo uzywamy polecenia:
   $ make test
   ```
 
@@ -62,7 +66,22 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 - Integracja z TravisCI:
 
   ```
-  # miejsce na twoje notatki
+  # plik .travis.yml
+  language: python
+
+  services:
+    - docker
+
+  python:
+    - "3.8"
+  install:
+    - make deps
+  script:
+    - make test
+    - make lint
+  after_success:
+    - make docker_build
+
   ```
 
 # Pomocnicze
@@ -74,6 +93,27 @@ o Continuous Integration, Continuous Delivery i Continuous Deployment.
 ## Centos
 
 - Instalacja docker-a:
+  ```
+  Docker zazwyczaj nie restartujemy, kasujemy i uruchamiamy na nowo:
+  $ docker stop hello-world-printer-dev
+  $ docker rm hello-world-printer-dev
+  $ make docker_run
+  ```
+
+```
+  #Uruchom hello-world-printer jako docker, w terminalu:
+  $ make docker_run
+  # zweryfikuj, że docker jest uruchomiony
+  $ docker ps
+  # sprawdź, czy aplikacje działa poprawnie
+  $ curl 127.0.0.1:5000
+  # wyświetlmy logi, zauważ, że widzisz informację o połączeniu z curla
+  $ docker logs hello-world-printer-dev
+  # jeśli nie widzisz dockera, kiedy uruchamiasz z docker ps dodaj -a
+  $ docker ps -a
+  $ docker logs hello-world-printer-dev
+```
+
 
   ```
   $ yum remove docker \
