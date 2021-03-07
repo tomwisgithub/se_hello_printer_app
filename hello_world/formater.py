@@ -20,7 +20,7 @@ def get_formatted(msg, imie, format):
         result = format_to_json(msg, imie)
     elif format == XML:
         result = format_to_xml(msg, imie)
-
+# test
     return result
 
 
