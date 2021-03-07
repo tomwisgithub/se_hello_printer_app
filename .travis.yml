@@ -10,5 +10,5 @@ install:
 script:
   - make test
   - make lint
-after_success:
   - make docker_build
+  - make docker_push
